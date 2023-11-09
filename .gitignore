@@ -19,10 +19,12 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+package-lock.json
 
 #django
-envdjangoreact
-*/__pycache__
+anchorenv
 *.sql
 *.sqlite3
 static
+*.env
+*__pycache__

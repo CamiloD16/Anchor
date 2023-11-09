@@ -1,0 +1,5 @@
+.register {
+  background: rgba(8, 145, 178, 1);
+  background: -webkit-linear-gradient(to right, #FFFFFF, #6DD5FA, rgba(8, 145, 178, 1));
+  background: linear-gradient(to right, #FFFFFF, #6DD5FA, rgba(8, 145, 178, 1));
+}
