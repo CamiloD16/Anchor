@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
+from ckeditor.fields import RichTextField
 
 class Language(models.Model):
     language = models.CharField(max_length=50, unique=True)
@@ -15,7 +16,7 @@ class Publication(models.Model):
     language = models.ForeignKey(Language,  on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=255)
-    description = models.TextField()
+    description = RichTextField()
     image = models.ImageField(upload_to='publications/', null=True, blank=True)
 
     def __str__(self):
@@ -31,7 +32,7 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     publication = models.ForeignKey(Publication, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
-    description = models.TextField()
+    description = RichTextField()
 
     def __str__(self):
         return f'Comment by {self.user} on {self.publication.title}'

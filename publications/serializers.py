@@ -28,6 +28,14 @@ class SerializerPublication(serializers.ModelSerializer):
 
 
 class SerializerComment(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+    publication = serializers.PrimaryKeyRelatedField(queryset=Publication.objects.all())
+
     class Meta:
         model = Comment
-        fields = ("id", "description")
+        fields = "__all__"
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['user'] = SerializerUser(instance.user).data
+        return representation

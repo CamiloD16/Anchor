@@ -6,6 +6,8 @@ import './styles/App.css'
 import Register from './pags/Register'
 import Login from './pags/Login'
 import Home from './pags/Home'
+import Publication from './pags/Publication'
+import CreatePost from './pags/CreatePost'
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
             <Route index element={<Home />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
+            <Route path="publication/:id" element={<Publication /> } />
+            <Route path="createpost" element={<CreatePost /> } />
         </Routes>
       </Router>
     </div>

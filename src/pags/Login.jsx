@@ -18,24 +18,29 @@ const Login = () => {
 
     e.preventDefault();
 
-    let response = await fetch(`${process.env.REACT_APP_API_URL}/api/token/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ 'username': username, 'password': password }),
-    });
+    try {
+      let response = await fetch(`${process.env.REACT_APP_API_URL}/api/token/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 'username': username, 'password': password }),
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (response.status === 200) {
-      const user = jwtDecode(data.access);
-      authStore.login(user, data);
-      navigate('/');
-    } else if (response.status === 401) {
-      alert('Incorrect data');
-    } else {
-      alert('Something went wrong');
+      if (response.status === 200) {
+        const user = jwtDecode(data.access);
+        authStore.login(user, data);
+        navigate('/');
+      } else if (response.status === 401) {
+        alert('Incorrect information');
+      } else {
+        alert('Something went wrong');
+      }
+
+    } catch (error) {
+      console.error(error)
     }
   }
 
