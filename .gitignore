@@ -28,3 +28,4 @@ anchorenv
 static
 *.env
 *__pycache__
+media

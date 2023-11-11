@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import Publication from './Publication'
-import { format } from 'date-fns'
 
 const Principal = () => {
 
@@ -27,19 +26,17 @@ const Principal = () => {
   return (
     <>
       <input className='shadow-md block w-11/12 md:w-5/12 py-3 px-10 outline-none mx-auto mb-5 rounded-3xl'  value={search} type='text' placeholder='Search...' onChange={searcher} />
-      <section className='flex flex-wrap justify-center my-0 mx-auto max-w-screen-xl gap-3 py-5'>
+      <section className='flex flex-wrap justify-center xl:justify-start my-0 mx-auto max-w-screen-xl gap-8 py-5 lg:px-8'>
       {filteredPublications.slice().reverse().map((publication, key) => {
-
-        const formattedDateString = format(new Date(publication.date), "yyyy/MM/dd")
-
         return (
           <Publication
             key = {key}
             title = {publication.title}
             image = {publication.image}
             username = {publication.user.username}
+            userId = {publication.user.id}
             language = {publication.language}
-            formattedDateString = {formattedDateString}
+            date = {publication.date}
             publicationId = {publication.id}
           />
         )

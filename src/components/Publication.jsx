@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { format } from 'date-fns'
 
 const Publication = (props) => {
 
@@ -13,22 +14,23 @@ const Publication = (props) => {
   }
 
   const truncatedText = truncateText(props.title, 43);
+  const formattedDateString = format(new Date(props.date), "yyyy/MM/dd")
 
   return (
-    <article className="bg-white py-6 rounded-xl w-full md:w-5/12 xl:w-3/12 flex flex-col justify-between shadow">
+    <article className="bg-white py-6 rounded-xl w-full md:w-5/12 xl:w-96 flex flex-col justify-between shadow">
       <div className="flex justify-between items-center mb-5 text-gray-500 px-5">
         <span className="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center rounded">
           {props.language}
         </span>
-        <span className="text-sm">{props.formattedDateString}</span>
+        <span className="text-sm">{formattedDateString}</span>
       </div>
       <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 px-5 text-justify">{truncatedText}<a href="#">{}</a></h2>
 
       <img className='w-full my-5 h-64' src={props.image} alt="" />
       <div className="flex justify-between items-center px-3">
-        <div className="flex items-center space-x-4">
+        <div onClick={() => navigate(`/profile/${props.userId}`)} className="flex items-center space-x-4 cursor-pointer">
           <img className="w-7 rounded-full" src="https://cdn.iconscout.com/icon/free/png-512/free-react-1-282599.png?f=webp&w=256" alt="User avatar" />
-          <span className="font-medium">
+          <span className="font-medium capitalize hover:text-cyan-600">
             {props.username}
           </span>
         </div>

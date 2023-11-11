@@ -20,13 +20,18 @@ const Comment = (props) => {
     e.preventDefault()
     try {
       const url = `${process.env.REACT_APP_API_URL}/api/publications/comment/`
-      fetch(url, {
+      const response = await fetch(url, {
         method: 'POST',
         body: formData,
       })
+
+      if (response.status === 201) {
+        setComment("")
+      }
     } catch (error) {
       console.error(error)
     }
+
   }
 
   useEffect(() => {
@@ -56,12 +61,12 @@ const Comment = (props) => {
     }
   };
 
-
   return (
     <>
       <div className='my-5'>
-        <h4 className='text-2xl mb-5 font-bold'>Comments</h4>
-        {comments.map((value, key) => {
+        {comments && <h4 className='text-2xl mb-5 font-bold'>Comments</h4>}
+
+        {comments && comments.map((value, key) => {
           const newDate = format(new Date(value.date), "yyyy-MM-dd 'at' HH:mm")
           return (
             value.publication === props.idPublication && (
