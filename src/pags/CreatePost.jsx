@@ -34,6 +34,9 @@ const CreatePost = () => {
     try {
       const response = await fetch(url, {
         method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${JSON.parse(localStorage.getItem('authToken'))?.access}`,
+        },
         body: formData,
       })
 

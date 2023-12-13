@@ -35,6 +35,7 @@ const Publication = () => {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
+            'Authorization': `Bearer ${authStore?.token?.access}`,
           },
         });
 

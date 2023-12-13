@@ -19,19 +19,21 @@ const Comment = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const url = `${process.env.REACT_APP_API_URL}/api/publications/comment/`
+      const url = `${process.env.REACT_APP_API_URL}/api/publications/comment/`;
       const response = await fetch(url, {
         method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${authStore?.token?.access}`,
+        },
         body: formData,
-      })
+      });
 
       if (response.status === 201) {
-        setComment("")
+        setComment("");
       }
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-
   }
 
   useEffect(() => {
@@ -53,6 +55,7 @@ const Comment = (props) => {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
+            'Authorization': `Bearer ${JSON.parse(localStorage.getItem('authToken'))?.access}`,
           },
         });
       } catch (error) {
@@ -64,7 +67,8 @@ const Comment = (props) => {
   return (
     <>
       <div className='my-5'>
-        {comments && <h4 className='text-2xl mb-5 font-bold'>Comments</h4>}
+
+        <h4 className='text-2xl mb-5 font-bold'>Comments</h4>
 
         {comments && comments.map((value, key) => {
           const newDate = format(new Date(value.date), "yyyy-MM-dd 'at' HH:mm")

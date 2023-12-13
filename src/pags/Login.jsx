@@ -23,6 +23,7 @@ const Login = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authStore?.token?.access}`,
         },
         body: JSON.stringify({ 'username': username, 'password': password }),
       });
